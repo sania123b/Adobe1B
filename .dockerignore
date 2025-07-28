@@ -1,0 +1,10 @@
+__pycache__/
+*.png
+*.jpg
+*.zip
+*.tar.gz
+*.whl
+.venv/
+*.log
+datasets/
+models/

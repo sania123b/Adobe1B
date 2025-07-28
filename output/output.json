@@ -1,97 +1,121 @@
 {
   "metadata": {
     "input_documents": [
-      "South of France - Cities.pdf",
-      "South of France - Cuisine.pdf",
-      "South of France - History.pdf",
-      "South of France - Restaurants and Hotels.pdf",
-      "South of France - Things to Do.pdf",
-      "South of France - Tips and Tricks.pdf",
-      "South of France - Traditions and Culture.pdf"
+      "Breakfast Ideas.pdf",
+      "Dinner Ideas - Mains_1.pdf",
+      "Dinner Ideas - Mains_2.pdf",
+      "Dinner Ideas - Mains_3.pdf",
+      "Dinner Ideas - Sides_1.pdf",
+      "Dinner Ideas - Sides_2.pdf",
+      "Dinner Ideas - Sides_3.pdf",
+      "Dinner Ideas - Sides_4.pdf",
+      "Lunch Ideas.pdf"
     ],
-    "persona": "Travel Planner",
-    "job_to_be_done": "Plan a trip of 4 days for a group of 10 college friends.",
-    "processing_timestamp": "2025-07-25T01:13:21.470711"
+    "persona": "Food Contractor",
+    "job_to_be_done": "Prepare a vegetarian buffet-style dinner menu for a corporate gathering, including gluten-free items.",
+    "processing_timestamp": "2025-07-28T19:04:17.697669"
   },
   "extracted_sections": [
     {
-      "document": "South of France - Cities.pdf",
-      "section_title": "Montpellier: A University City with Medieval Charm",
+      "document": "Breakfast Ideas.pdf",
+      "section_title": "Breakfast Sandwich",
       "importance_rank": 1,
-      "page_number": 10
+      "page_number": 5
     },
     {
-      "document": "South of France - Cuisine.pdf",
-      "section_title": "Must-Visit Restaurants",
+      "document": "Dinner Ideas - Mains_1.pdf",
+      "section_title": "General Tso's Chicken",
       "importance_rank": 2,
-      "page_number": 4
+      "page_number": 11
     },
     {
-      "document": "South of France - History.pdf",
-      "section_title": "Montpellier: A University City with Medieval Charm",
+      "document": "Dinner Ideas - Mains_2.pdf",
+      "section_title": "Ingredients:",
       "importance_rank": 3,
       "page_number": 10
     },
     {
-      "document": "South of France - Restaurants and Hotels.pdf",
-      "section_title": "Family-Friendly Hotels",
+      "document": "Dinner Ideas - Mains_3.pdf",
+      "section_title": "Ingredients:",
       "importance_rank": 4,
-      "page_number": 9
+      "page_number": 4
     },
     {
-      "document": "South of France - Things to Do.pdf",
-      "section_title": "Family-Friendly Activities",
+      "document": "Dinner Ideas - Sides_1.pdf",
+      "section_title": "Ingredients",
       "importance_rank": 5,
-      "page_number": 9
+      "page_number": 2
     },
     {
-      "document": "South of France - Tips and Tricks.pdf",
-      "section_title": "The Ultimate South of France Travel Companion: Your Comprehensive Guide to Packing,",
+      "document": "Dinner Ideas - Sides_2.pdf",
+      "section_title": "Cornbread",
       "importance_rank": 6,
-      "page_number": 1
+      "page_number": 2
     },
     {
-      "document": "South of France - Traditions and Culture.pdf",
-      "section_title": "A Comprehensive Guide to Traditions and Culture in the South of France",
+      "document": "Dinner Ideas - Sides_3.pdf",
+      "section_title": "Hummus",
       "importance_rank": 7,
-      "page_number": 1
+      "page_number": 2
+    },
+    {
+      "document": "Dinner Ideas - Sides_4.pdf",
+      "section_title": "Salpic\u00e3o",
+      "importance_rank": 8,
+      "page_number": 12
+    },
+    {
+      "document": "Lunch Ideas.pdf",
+      "section_title": "Chicken Caesar Wrap",
+      "importance_rank": 9,
+      "page_number": 2
     }
   ],
   "subsection_analysis": [
     {
-      "document": "South of France - Cities.pdf",
-      "refined_text": "Montpellier: A University City with Medieval Charm History Montpellier, founded in the 10th century, is known for its prestigious university and vibrant cultural scene. The city has a rich history, with a blend of medieval, Renaissance, and modern architecture. Montpellier has been a center of learning and innovation for centuries, attracting scholars and students from around the world. Key Attractions Place de la Comdie: The central square of Montpellier, this bustling area is surrounded by cafes, shops, and the impressive Opra Comdie. It is a great place to start exploring the city. Saint-Pierre Cathedral: This Gothic cathedral, built in the 14th century, is known for its imposing facade and twin towers. It is the seat of the Archdiocese of Montpellier.",
+      "document": "Breakfast Ideas.pdf",
+      "refined_text": "Breakfast Sandwich Ingredients: 1 English mun, split and toasted 1 large egg 1 slice of cheese 1 slice of ham or bacon Salt and pepper to taste Instructions: Cook the egg in a skillet over medium heat, seasoning with salt and pepper. Place the cheese on top of the egg to melt. Assemble the sandwich with the egg, cheese, and ham or bacon between the English mun halves. Chia Pudding Ingredients:",
+      "page_number": 5
+    },
+    {
+      "document": "Dinner Ideas - Mains_1.pdf",
+      "refined_text": "General Tso's Chicken Ingredients: 1 pound boneless, skinless chicken thighs, cubed 1/4 cup cornstarch 1/4 cup soy sauce 1/4 cup rice vinegar 1/4 cup hoisin sauce 2 tablespoons sugar 2 cloves garlic, minced 1 teaspoon grated ginger 1/4 cup vegetable oil Cooked rice for serving Sliced green onions for garnish Instructions: In a bowl, toss chicken cubes with cornstarch. Heat vegetable oil in a skillet over medium heat. Cook chicken until golden and crispy, then set aside. In the same skillet, saut minced garlic and grated ginger until fragrant.",
+      "page_number": 11
+    },
+    {
+      "document": "Dinner Ideas - Mains_2.pdf",
+      "refined_text": "Ingredients: 4 chicken thighs 1 small onion, diced 2 cloves garlic, minced 1 cup red wine 1 cup chicken broth 1 cup mushrooms, sliced 1 cup carrots, sliced 1/4 cup bacon, chopped 2 tablespoons tomato paste 2 tablespoons flour 2 tablespoons butter 1 teaspoon thyme 1 bay leaf Salt and pepper to taste Instructions: Preheat oven to 350F (175C). In a large pot, melt butter over medium heat.",
       "page_number": 10
     },
     {
-      "document": "South of France - Cuisine.pdf",
-      "refined_text": "Must-Visit Restaurants To truly experience the culinary delights of the South of France, here are some restaurants you should consider visiting: Le Petit Nice Passedat (Marseille): A three-Michelin-starred restaurant oering exquisite seafood dishes and stunning views of the Mediterranean. Chef Grald Passedat is known for his innovative approach to seafood, creating dishes that are both visually stunning and incredibly flavorful. The restaurant's location on the clis overlooking the sea adds to the overall dining experience. La Chvre d'Or (ze): Located in a medieval village, this two-Michelin-starred restaurant serves refined Provenal cuisine with breathtaking views of the French Riviera. The restaurant's terrace oers panoramic views of the Mediterranean, making it the perfect spot for a romantic dinner. The menu features dishes that highlight the region's fresh, seasonal ingredients.",
+      "document": "Dinner Ideas - Mains_3.pdf",
+      "refined_text": "Ingredients: 1 pound ziti pasta 1 pound ground beef or Italian sausage 1 small onion, diced 2 cloves garlic, minced 1 jar (24 ounces) marinara sauce 1 cup ricotta cheese 1 cup shredded mozzarella cheese 1/2 cup grated Parmesan cheese 1 teaspoon dried oregano Salt and pepper to taste Instructions: Preheat oven to 375F (190C). Cook ziti according to package instructions, then drain. In a skillet, cook ground beef or sausage with diced onion and minced garlic until browned. Stir in marinara sauce, oregano, salt, and pepper, and simmer for 10 minutes. In a baking dish, layer half the ziti, half the sauce, dollops of ricotta, and half the",
       "page_number": 4
     },
     {
-      "document": "South of France - History.pdf",
-      "refined_text": "Montpellier: A University City with Medieval Charm Montpellier, founded in the 10th century, is known for its prestigious university and vibrant cultural scene. The city has a rich history, with a blend of medieval, Renaissance, and modern architecture. Key Historical Sites in Montpellier Place de la Comdie: The central square of Montpellier, this bustling area is surrounded by cafes, shops, and the impressive Opra Comdie. It is a great place to start exploring the city. Saint-Pierre Cathedral: This Gothic cathedral, built in the 14th century, is known for its imposing facade and twin towers. It is the seat of the Archdiocese of Montpellier. Promenade du Peyrou: This 17th-century promenade oers stunning views of the city and features the Arc de Triomphe and the Chteau d'Eau, a beautiful water tower.",
-      "page_number": 10
+      "document": "Dinner Ideas - Sides_1.pdf",
+      "refined_text": "Ingredients o 2 cups black-eyed peas o 1 small onion o 2 cloves garlic o 1 teaspoon salt o Oil for frying Instructions : o Soak black-eyed peas overnight, then peel and rinse. o Blend peas with diced onion, minced garlic, and salt until smooth. o Form mixture into balls and fry in hot oil until golden. o Drain on paper towels and serve warm. Agedashi Tofu Ingredients : o 1 block tofu o 1/4 cup cornstarch o 1 cup dashi broth o 2 tablespoons soy sauce",
+      "page_number": 2
     },
     {
-      "document": "South of France - Restaurants and Hotels.pdf",
-      "refined_text": "Family-Friendly Hotels Club Med Opio en Provence (Opio): A family-friendly resort oering a wide range of activities for children and adults, including sports, entertainment, and kids' clubs. The beautiful setting and all-inclusive amenities make it a hassle-free vacation spot. Le Mas de Pierre (Saint-Paul-de-Vence): A luxurious family-friendly hotel oering spacious rooms, beautiful gardens, and a variety of activities for children. The elegant decor and attentive service ensure a comfortable stay for families. Htel Les Roches Rouges (Saint-Raphal): A family-friendly hotel located on the beach, oering comfortable rooms, a kids' club, and a variety of water sports. The beachfront location and family-oriented amenities make it a great choice for a seaside vacation. Chteau de Berne (Lorgues): A family-friendly hotel located on a vineyard, oering spacious rooms, a kids' club, and a variety of outdoor activities. The picturesque",
-      "page_number": 9
+      "document": "Dinner Ideas - Sides_2.pdf",
+      "refined_text": "Cornbread Ingredients : o 1 cup cornmeal o 1 cup flour o 1/4 cup sugar o 1 tablespoon baking powder o 1/2 teaspoon salt o 1 cup milk o 1/4 cup vegetable oil o 1 egg Instructions : o Preheat oven to 400F (200C). o Mix cornmeal, flour, sugar, baking powder, and salt in a bowl. o Add milk, oil, and beaten egg, stir until combined. o Pour batter into a greased baking pan. o Bake for 20-25 minutes until golden. o Serve warm.",
+      "page_number": 2
     },
     {
-      "document": "South of France - Things to Do.pdf",
-      "refined_text": "Family-Friendly Activities The South of France oers a variety of activities that are perfect for families with children: Theme Parks and Attractions Antibes: Visit Marineland for marine shows and an aquarium. Frjus: Cool o at Aqualand water park. Villeneuve-Loubet: Enjoy quirky attractions at Le Village des Fous. Monteux: Spend a day at Parc Spirou, a theme park based on the famous comic book character. La Palmyre: Explore the La Palmyre Zoo, home to a wide variety of animals. Cap d'Agde: Have fun at Luna Park, an amusement park with rides and games. Toulouse: Visit the Cit de l'Espace, a space-themed science museum with interactive",
-      "page_number": 9
+      "document": "Dinner Ideas - Sides_3.pdf",
+      "refined_text": "Hummus Ingredients : o 1 can chickpeas o 1/4 cup tahini o 1/4 cup lemon juice o 2 cloves garlic o 1/4 cup olive oil o 1 teaspoon salt Instructions : o Drain and rinse chickpeas. o Blend chickpeas, tahini, lemon juice, minced garlic, and salt in a food processor. o Slowly add olive oil while blending until smooth. o Serve with a drizzle of olive oil. Japchae Ingredients : o 8 ounces sweet potato noodles o 1/2 pound beef",
+      "page_number": 2
     },
     {
-      "document": "South of France - Tips and Tricks.pdf",
-      "refined_text": "The Ultimate South of France Travel Companion: Your Comprehensive Guide to Packing, Planning, and Exploring Introduction Planning a trip to the South of France requires thoughtful preparation to ensure a comfortable and enjoyable experience. This guide covers everything from packing essentials to travel tips, catering to all seasons and various activities. Whether you're traveling solo, with kids, or in a group, this guide will help you make the most of your trip.",
-      "page_number": 1
+      "document": "Dinner Ideas - Sides_4.pdf",
+      "refined_text": "Salpico Ingredients : o 2 cups shredded chicken o 1 small onion o 1 carrot o 1 apple o 1/4 cup raisins o 1/4 cup mayonnaise o 1/4 cup parsley o 1 teaspoon salt Instructions : o Dice onion, grate carrot, and chop apple. o Mix shredded chicken with onion, carrot, apple, raisins, mayonnaise, chopped parsley, and salt. o Serve chilled. Saltfish Fritters Ingredients :",
+      "page_number": 12
     },
     {
-      "document": "South of France - Traditions and Culture.pdf",
-      "refined_text": "A Comprehensive Guide to Traditions and Culture in the South of France Introduction The South of France, with its picturesque landscapes, charming villages, and vibrant cities, is not only a feast for the eyes but also a treasure trove of cultural traditions and heritage. This region, known for its rich history and diverse influences, oers a unique blend of customs, festivals, and local practices that reflect its distinct identity. This guide will take you through the various traditions and cultural aspects of the South of France, providing a deep understanding of what makes this region so special.",
-      "page_number": 1
+      "document": "Lunch Ideas.pdf",
+      "refined_text": "Chicken Caesar Wrap Ingredients: 1 whole wheat tortilla 1 cup cooked chicken breast, sliced 1 cup romaine lettuce, chopped 2 tablespoons Caesar dressing 2 tablespoons grated Parmesan cheese Optional: croutons for extra crunch Instructions: Lay the tortilla flat and spread the Caesar dressing evenly. Add the chicken, lettuce, and Parmesan cheese. Roll up the tortilla tightly and slice in half. Quinoa Salad Ingredients:",
+      "page_number": 2
     }
   ]
 }

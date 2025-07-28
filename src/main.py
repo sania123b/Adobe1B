@@ -4,15 +4,45 @@ import re
 from pathlib import Path
 from datetime import datetime
 from sentence_transformers import SentenceTransformer, util
+import os
 
 # === Config ===
 BASE_DIR = Path(__file__).resolve().parent.parent
-INPUT_JSON_PATH = BASE_DIR / "input" / "input.json"
 INPUT_PDF_DIR = BASE_DIR / "input"
+INPUT_JSON_PATH = INPUT_PDF_DIR / "input.json"
+PERSONA_PATH = INPUT_PDF_DIR / "persona.txt"
+JOB_PATH = INPUT_PDF_DIR / "job_to_be_done.txt"
 OUTPUT_DIR = BASE_DIR / "output"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
-embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+embedding_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+
+
+def build_input_config():
+    pdf_files = [f for f in os.listdir(INPUT_PDF_DIR) if f.endswith(".pdf")]
+
+    print("\nFound PDF files:")
+    for f in pdf_files:
+        print(f"- {f}")
+
+    # Read persona and job from files
+    with open(PERSONA_PATH, "r") as f:
+        persona = f.read().strip()
+
+    with open(JOB_PATH, "r") as f:
+        job_task = f.read().strip()
+
+    input_data = {
+        "persona": {"role": persona},
+        "job_to_be_done": {"task": job_task},
+        "documents": [{"filename": f} for f in pdf_files]
+    }
+
+    with open(INPUT_JSON_PATH, "w") as f:
+        json.dump(input_data, f, indent=2)
+
+    print(f"\n✅ Auto-generated input.json with {len(pdf_files)} files.")
+
 
 def extract_blocks(pdf_path):
     doc = fitz.open(pdf_path)
@@ -38,6 +68,7 @@ def extract_blocks(pdf_path):
                     all_sizes.append(span["size"])
     return blocks, all_sizes
 
+
 def score_block(block, min_size, max_size):
     size_score = (block["font_size"] - min_size) / (max_size - min_size + 1e-5)
     score = size_score
@@ -48,6 +79,7 @@ def score_block(block, min_size, max_size):
     if block["bbox"][1] < 100:
         score += 0.3
     return score
+
 
 def refine_context(top_block, all_blocks):
     page_blocks = [b for b in all_blocks if b["page"] == top_block["page"]]
@@ -64,12 +96,13 @@ def refine_context(top_block, all_blocks):
         return top_block["text"] + " " + " ".join(context_blocks)
     return top_block["text"]
 
+
 def clean_refined_text(text):
     text = text.replace("\n", " ").replace("\u2022", " ")
-    # Remove any remaining non-printable/control chars:
     text = re.sub(r'[^\x20-\x7E]', '', text)
     text = re.sub(r'\s+', ' ', text).strip()
     return text
+
 
 def process_pdf(pdf_file, persona, job_task):
     blocks, sizes = extract_blocks(pdf_file)
@@ -103,10 +136,10 @@ def process_pdf(pdf_file, persona, job_task):
         "refined_text": refined_clean
     }]
 
+
 def main():
     if not INPUT_JSON_PATH.exists():
-        print(f"❌ {INPUT_JSON_PATH} not found")
-        return
+        build_input_config()
 
     with open(INPUT_JSON_PATH) as f:
         input_data = json.load(f)
@@ -153,6 +186,7 @@ def main():
         json.dump(output_data, f, indent=2)
 
     print(f"✅ Saved: {output_file}")
+
 
 if __name__ == "__main__":
     main()
