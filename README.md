@@ -1,98 +1,47 @@
-# 📘 Adobe Hackathon Round 2 – Persona-Driven Document Intelligence
+# 🧠 Adobe Hackathon 2025 - Round 2  
+### 📚 Persona-Driven PDF Intelligence Extractor
 
-## 🚀 Challenge Overview
-
-In Round 2 of Adobe’s “Connecting the Dots” Hackathon, the goal is to build an intelligent document analyst that **extracts and prioritizes the most relevant sections from a collection of PDFs**, based on a given **persona** and a **job-to-be-done**.
-
-This round builds on top of Round 1 by introducing **semantic understanding**, **section ranking**, and **contextual refinement**.
+This project is part of **Round 2 of Adobe India's Hackathon 2025**, under the theme: **“Connecting the Dots Through Docs”**.  
+It builds an intelligent PDF understanding system that extracts and prioritizes key sections based on a specific **persona** and a **job-to-be-done**.
 
 ---
 
-## 💡 What This Project Does
+## 🚀 Features
 
-Given:
-- A set of PDFs (`/input/*.pdf`)
-- A persona file (`persona.txt`)
-- A task file (`job_to_be_done.txt`)
-
-The system:
-1. Extracts blocks of text using PyMuPDF
-2. Scores blocks using a combination of:
-   - Font size and position (structure-based)
-   - Semantic similarity to persona/task (transformer-based)
-3. Selects the **most relevant section** from each document
-4. Gathers nearby context and refines it
-5. Outputs a JSON file with:
-   - Extracted Sections (title, page, rank)
-   - Refined Subsections (text, page, document)
+- 📥 Accepts 3–10 related PDFs + Persona + Job-to-be-done.
+- 🧠 Uses **Sentence Transformers** for semantic scoring.
+- 🔠 Integrates **font styles, position, and size** for structural scoring.
+- 🤖 Selects top-ranked sections with local **subsection context**.
+- 📝 Produces a **standardized JSON output** with:
+  - Metadata
+  - Ranked extracted sections
+  - Subsection-level summaries
+- ✅ Works **offline** with **CPU-only** inference.
+- 🐳 Dockerized and compatible with AMD64 platform.
 
 ---
 
-## 🧠 Model and Libraries Used
+## 📁 Input/Output Structure
 
-| Component             | Description                                      |
-|----------------------|--------------------------------------------------|
-| `fitz` (PyMuPDF)      | PDF parsing and layout extraction               |
-| `sentence-transformers` | Semantic similarity scoring (MiniLM-L6-v2)     |
-| `langdetect` (optional) | For language-aware extensions (if needed)     |
-| `re`, `datetime`, `json` | Standard preprocessing and formatting         |
+### 📂 Input Directory (`input/`)
+- `*.pdf` – One or more PDF documents (3–10 files).
+- `persona.txt` – The role (e.g., "PhD Researcher in Biomedicine").
+- `job_to_be_done.txt` – The task (e.g., "Perform literature review on X").
 
-Transformer Model Used: `all-MiniLM-L6-v2` (approx. 90MB) ✅
-
----
-
-## 🏗 Directory Structure
-
-```
-.
-├── input/
-│   ├── file1.pdf
-│   ├── file2.pdf
-│   ├── persona.txt
-│   ├── job_to_be_done.txt
-│   └── input.json (auto-generated if missing)
-├── output/
-│   └── output.json (final result)
-├── src/
-│   └── main.py (this script)
-├── Dockerfile
-└── README.md
-```
-
----
-
-## 📦 How to Build and Run (Dockerized)
-
-### 🔨 Build Docker Image
-
-```bash
-docker build --platform linux/amd64 -t adobe-pdf-agent .
-```
-
-### ▶️ Run Container
-
-```bash
-docker run --rm   -v $(pwd)/input:/app/input   -v $(pwd)/output:/app/output   --network none   adobe-pdf-agent
-```
-
-⏱ **Processing Time:** < 10 seconds for 3–5 PDFs
-
----
-
-## 🧾 Output Format (output/output.json)
+### 📤 Output: `output/output.json`
 
 ```json
 {
   "metadata": {
     "input_documents": ["file1.pdf", "file2.pdf"],
-    "persona": "Research Analyst",
-    "job_to_be_done": "Analyze R&D investment trends",
-    "processing_timestamp": "2025-07-27T15:44:32"
+    "persona": "PhD Researcher in Biomedicine",
+    "job_to_be_done": "Literature review on GNNs",
+    "processing_timestamp": "2025-07-28T10:32:01"
   },
   "extracted_sections": [
     {
       "document": "file1.pdf",
-      "section_title": "R&D Investment Overview",
+      "section_title": "Graph Attention Networks",
       "importance_rank": 1,
       "page_number": 3
     }
@@ -100,7 +49,7 @@ docker run --rm   -v $(pwd)/input:/app/input   -v $(pwd)/output:/app/output   --
   "subsection_analysis": [
     {
       "document": "file1.pdf",
-      "refined_text": "R&D spending has increased by 23%...",
+      "refined_text": "Graph Attention Networks (GATs) allow node representation...",
       "page_number": 3
     }
   ]
@@ -109,34 +58,94 @@ docker run --rm   -v $(pwd)/input:/app/input   -v $(pwd)/output:/app/output   --
 
 ---
 
-## 🧪 Example Scenario
+## 🐳 Docker Instructions
 
-**Persona:** PhD Scholar in Environmental Science  
-**Task:** Summarize key findings related to climate change in 3 UN reports.
+### 1️⃣ Build Docker Image
+```bash
+docker build -t adobe1b-app .
+```
 
-→ The model ranks and extracts top headings like _"Climate Impact Summary"_ and refines paragraphs following the heading for context. Final JSON is ready for visualization or embedding in a reading experience.
-
----
-
-## 📌 Constraints Followed
-
-| Constraint              | ✅ Status           |
-|-------------------------|--------------------|
-| CPU-only (AMD64)        | ✅ Fully compatible |
-| Max model size < 1GB    | ✅ Model = ~90MB    |
-| No Internet Calls       | ✅ Offline mode     |
-| Execution < 60s         | ✅ Runs < 10s       |
+### 2️⃣ Run Docker Container
+```bash
+docker run --rm -v "${PWD}:/app" -w /app/src adobe1b python main.py
+```
 
 ---
 
-## 📎 Notes
+## ⚙ How It Works
 
-- The entire logic is implemented in a single `main.py` script for simplicity.
-- Works on any domain of documents: research, education, finance, etc.
-- You can manually edit `persona.txt` and `job_to_be_done.txt` in the `input/` folder to test custom cases.
+1. **Input Parsing:**  
+   Reads all PDFs from `/input`, along with `persona.txt` and `job_to_be_done.txt`.  
+   Auto-generates `input.json` if not provided.
+
+2. **Block Extraction:**  
+   Parses all visible text from each page using `PyMuPDF`.  
+   Each block is scored structurally (font size, bold, uppercase, position).
+
+3. **Semantic Scoring:**  
+   Uses `SentenceTransformers` (MiniLM) to score semantic relevance between each block and the combined persona/task.
+
+4. **Total Score:**  
+   Combined structure + semantic score = final relevance.  
+   Top-ranked block is chosen and enhanced with local context.
+
+5. **JSON Output:**  
+   - Extracted top section(s)
+   - Subsection summaries
+   - Metadata and page references
 
 ---
 
-## 📍 License
+## 🛠️ Tech Stack
 
-MIT License. Built as part of Adobe India Hackathon 2025 (Round 2).
+| Component        | Tool / Library                        |
+|------------------|----------------------------------------|
+| 🐍 Language       | Python 3.12                            |
+| 📄 PDF Parsing    | PyMuPDF (`fitz`)                      |
+| 🧠 Semantic Model | `sentence-transformers/all-MiniLM-L6-v2` |
+| 📦 Embedding      | `torch`, `transformers`               |
+| 🐳 Container      | Docker (AMD64)                        |
+
+---
+
+## ⚙ Constraints Satisfied
+
+| Constraint           | Status              |
+|----------------------|---------------------|
+| ⏱ Runtime            | ✅ < 60 seconds     |
+| 🧠 Model Size         | ✅ < 1 GB (170MB)   |
+| 📶 Internet Required  | ✅ No               |
+| 🖥 CPU Architecture   | ✅ AMD64 Compatible |
+| 📤 Output Format      | ✅ Valid JSON       |
+
+---
+
+## 🧪 Sample Use Case
+
+**Persona:** Investment Analyst  
+**Job to be done:** "Compare R&D investments across Apple, Google, Amazon"  
+**Input:** 2022–2024 annual reports of tech companies  
+**Output:** Key sections highlighting R&D trends + refined analysis
+
+---
+
+## 📜 License
+
+MIT License — free to use, modify, and distribute with attribution.
+
+---
+
+## 🙌 Authors
+
+Built by [@Pavanid2325](https://github.com/Pavanid2325), [@sania123b](https://github.com/sania123b), [@nithya996](https://github.com/nithya996) for Adobe Hackathon 2025.
+
+---
+
+## ✨ Ready to Run?
+
+```bash
+docker build -t adobe1b-app .
+docker run --rm -v "${PWD}:/app" -w /app/src adobe1b python main.py
+```
+
+Let your PDFs think like humans — and deliver **contextual, ranked insights** that match the reader’s intent.
