@@ -1,71 +1,142 @@
-# 🧠 Adobe 1B - Persona-Driven Document Intelligence
+# 📘 Adobe Hackathon Round 2 – Persona-Driven Document Intelligence
 
-This solution automatically analyzes PDF documents and extracts the most relevant sections and sub-sections based on a user persona and their job-to-be-done. It combines structural and semantic analysis using lightweight NLP models.
+## 🚀 Challenge Overview
+
+In Round 2 of Adobe’s “Connecting the Dots” Hackathon, the goal is to build an intelligent document analyst that **extracts and prioritizes the most relevant sections from a collection of PDFs**, based on a given **persona** and a **job-to-be-done**.
+
+This round builds on top of Round 1 by introducing **semantic understanding**, **section ranking**, and **contextual refinement**.
 
 ---
 
-## 📁 Folder Structure
+## 💡 What This Project Does
 
-ADOBE1B/
+Given:
+- A set of PDFs (`/input/*.pdf`)
+- A persona file (`persona.txt`)
+- A task file (`job_to_be_done.txt`)
+
+The system:
+1. Extracts blocks of text using PyMuPDF
+2. Scores blocks using a combination of:
+   - Font size and position (structure-based)
+   - Semantic similarity to persona/task (transformer-based)
+3. Selects the **most relevant section** from each document
+4. Gathers nearby context and refines it
+5. Outputs a JSON file with:
+   - Extracted Sections (title, page, rank)
+   - Refined Subsections (text, page, document)
+
+---
+
+## 🧠 Model and Libraries Used
+
+| Component             | Description                                      |
+|----------------------|--------------------------------------------------|
+| `fitz` (PyMuPDF)      | PDF parsing and layout extraction               |
+| `sentence-transformers` | Semantic similarity scoring (MiniLM-L6-v2)     |
+| `langdetect` (optional) | For language-aware extensions (if needed)     |
+| `re`, `datetime`, `json` | Standard preprocessing and formatting         |
+
+Transformer Model Used: `all-MiniLM-L6-v2` (approx. 90MB) ✅
+
+---
+
+## 🏗 Directory Structure
+
+```
+.
 ├── input/
-│ ├── *.pdf # Collection of related documents
-│ ├── Persona.txt # Persona description
-│ ├── job_to_be_done.txt # Task to be done
-│ └── input.json # (Auto-generated) structured config
-│
+│   ├── file1.pdf
+│   ├── file2.pdf
+│   ├── persona.txt
+│   ├── job_to_be_done.txt
+│   └── input.json (auto-generated if missing)
 ├── output/
-│ └── output.json # Final extracted and ranked output
-│
+│   └── output.json (final result)
 ├── src/
-│ └── main.py # Core processing script
-│
-├── requirements.txt # Python dependencies
-├── dockerfile # Docker configuration
-├── .dockerignore
-└── README.md # You're here!
-
-
-Build an intelligent document analyst that extracts and ranks the most **relevant sections** based on:
-- 👤 A **Persona** (e.g., student, researcher, analyst)
-- 🎯 A **Job to be Done** (task the persona must accomplish)
-- 📚 A set of **PDF documents**
+│   └── main.py (this script)
+├── Dockerfile
+└── README.md
+```
 
 ---
 
-## ⚙️ Dependencies
+## 📦 How to Build and Run (Dockerized)
 
-Listed in `requirements.txt`:
-```txt
-transformers==4.40.1
-sentence-transformers==2.2.2
-scikit-learn
-PyMuPDF==1.23.22
+### 🔨 Build Docker Image
 
+```bash
+docker build --platform linux/amd64 -t adobe-pdf-agent .
+```
 
+### ▶️ Run Container
 
-⛔ Constraints
-✅ CPU-only
+```bash
+docker run --rm   -v $(pwd)/input:/app/input   -v $(pwd)/output:/app/output   --network none   adobe-pdf-agent
+```
 
-✅ Model < 1GB (MiniLM)
+⏱ **Processing Time:** < 10 seconds for 3–5 PDFs
 
-✅ Runtime < 60 seconds for 3–5 PDFs
+---
 
-❌ No internet access inside container
+## 🧾 Output Format (output/output.json)
 
+```json
+{
+  "metadata": {
+    "input_documents": ["file1.pdf", "file2.pdf"],
+    "persona": "Research Analyst",
+    "job_to_be_done": "Analyze R&D investment trends",
+    "processing_timestamp": "2025-07-27T15:44:32"
+  },
+  "extracted_sections": [
+    {
+      "document": "file1.pdf",
+      "section_title": "R&D Investment Overview",
+      "importance_rank": 1,
+      "page_number": 3
+    }
+  ],
+  "subsection_analysis": [
+    {
+      "document": "file1.pdf",
+      "refined_text": "R&D spending has increased by 23%...",
+      "page_number": 3
+    }
+  ]
+}
+```
 
+---
 
+## 🧪 Example Scenario
 
-Total Size Summary (Model & Runtime)
+**Persona:** PhD Scholar in Environmental Science  
+**Task:** Summarize key findings related to climate change in 3 UN reports.
 
-| Component               | Approx Size |
-| ----------------------- | ----------- |
-| MiniLM-L6-v2 Model      | 85 MB       |
-| Scikit-learn Classifier | \~2 MB      |
-| OCR (Tesseract + data)  | \~50 MB     |
-| PyTorch Runtime         | \~300 MB    |
-| **Total**               | \~437 MB    |
+→ The model ranks and extracts top headings like _"Climate Impact Summary"_ and refines paragraphs following the heading for context. Final JSON is ready for visualization or embedding in a reading experience.
 
-RUN:
-1)docker build -t adobe-b .
-2)docker run --rm -v "${PWD}:/app" -w /app/src adobe1b python main.py
+---
 
+## 📌 Constraints Followed
+
+| Constraint              | ✅ Status           |
+|-------------------------|--------------------|
+| CPU-only (AMD64)        | ✅ Fully compatible |
+| Max model size < 1GB    | ✅ Model = ~90MB    |
+| No Internet Calls       | ✅ Offline mode     |
+| Execution < 60s         | ✅ Runs < 10s       |
+
+---
+
+## 📎 Notes
+
+- The entire logic is implemented in a single `main.py` script for simplicity.
+- Works on any domain of documents: research, education, finance, etc.
+- You can manually edit `persona.txt` and `job_to_be_done.txt` in the `input/` folder to test custom cases.
+
+---
+
+## 📍 License
+
+MIT License. Built as part of Adobe India Hackathon 2025 (Round 2).
